@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Ali!</title>
+    <style>
+      @import url('https://googleapis.com');
+      
+      html, body {
+        background-color: #2B0004 !important;
+        color: #000000;
+        font-family: 'Press Start 2P', monospace;
+        margin: 0; padding: 20px; box-sizing: border-box;
+        min-height: 100vh; display: flex; justify-content: center; align-items: center;
+        overflow-x: hidden; position: relative;
+      }
+      
+      .hidden { display: none !important; }
+      
+      /* GAME SCREEN DECORATIONS */
+      .decorations-container { position: absolute; width: 100%; height: 100%; top: 0; left: 0; pointer-events: none; z-index: 1; }
+      .pixel-decor { position: absolute; font-size: 24px; animation: floatDecor 4s ease-in-out infinite alternate; opacity: 0.7; }
+      @keyframes floatDecor { 0% { transform: translateY(0px); } 100% { transform: translateY(-15px); } }
+      
+      /* CONTAINER SYSTEM */
+      .menu-container { width: 100%; max-width: 600px; text-align: center; z-index: 10; display: flex; flex-direction: column; align-items: center; }
+      h1 { font-size: 20px; line-height: 1.6; margin-bottom: 40px; color: #A61022; text-shadow: 2px 2px #000000; }
+      .menu-options { display: flex; flex-direction: column; align-items: center; gap: 20px; width: 100%; }
+      
+      /* RETRO COMPACT BUTTONS */
+      button {
+        display: inline-block !important; font-family: 'Press Start 2P', monospace; font-size: 14px;
+        color: #ffffff !important; background-color: #A61022 !important; border: 3px solid #000000 !important;
+        padding: 15px 20px !important; cursor: pointer; width: 320px; box-shadow: 5px 5px 0px #000000;
+        text-align: left; box-sizing: border-box; margin: 5px; position: relative; z-index: 20;
+      }
+      button:hover { background-color: #000000 !important; color: #A61022 !important; border-color: #A61022 !important; box-shadow: 5px 5px 0px #A61022; }
+      .back-btn { width: 120px !important; margin-bottom: 25px; text-align: center; }
+      
+      /* 3D BOOK-FLIP CARD DESIGN */
+      .card-wrapper { perspective: 1200px; display: flex; justify-content: center; margin-top: 10px; }
+      .card { width: 320px; height: 440px; position: relative; transform-style: preserve-3d; transition: transform 0.8s; cursor: pointer; box-shadow: 6px 6px 0px #000000; }
+      .card.is-open { transform: rotateY(-140deg); }
+      .card-front, .card-inside { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; padding: 25px; box-sizing: border-box; border: 4px solid #000000; }
+      
+      .card-front { background-color: #A61022; display: flex; justify-content: center; align-items: center; z-index: 2; color: #000000; }
+      .card-front p { font-size: 12px; text-align: center; color: #ffffff; }
+      
+      /* INSIDE CARD STYLING */
+      .card-inside { 
+        background-color: #1a1a1a !important;
+        background-image: radial-gradient(#2b0004 1px, transparent 0);
+        background-size: 15px 15px;
+        transform: rotateY(180deg); 
+        overflow-y: auto; 
+        z-index: 1; 
+      }
+      
+      .letter-text { 
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 14px; 
+        font-weight: bold;
+        line-height: 1.6; 
+        color: #ff6b6b !important;
+        margin: 0; 
+        text-align: left; 
+      }
+    </style>
+</head>
+<body>
+
+<div class="decorations-container">
+  <span class="pixel-decor" style="top: 15%; left: 10%;">❤️</span>
+  <span class="pixel-decor" style="top: 25%; left: 85%;">⭐</span>
+  <span class="pixel-decor" style="top: 70%; left: 15%;">🍓</span>
+  <span class="pixel-decor" style="top: 80%; left: 75%;">⭐</span>
+  <span class="pixel-decor" style="top: 45%; left: 90%;">❤️</span>
+  <span class="pixel-decor" style="top: 10%; left: 70%;">🍓</span>
+</div>
+
+<div class="menu-container">
+  <div id="main-menu">
+    <h1>Happy birthday Ali!</h1>
+    <div class="menu-options">
+      <button onclick="openWishes()">1. Wishes</button>
+      <button onclick="openThankYou()">2. A late thank you</button>
+    </div>
+  </div>
+
+  <div id="wishes-screen" class="hidden">
+    <button class="back-btn" onclick="goBack()">← Back</button>
+    <div class="card-wrapper" onclick="toggleCard(1)">
+      <div class="card" id="card-1">
+        <div class="card-front"><p>Click to Open ✨</p></div>
+        <div class="card-inside">
+          <p class="letter-text">
+            Happy birthday Ali! I know we may have not known each other for a long time but I still wanted to make your day a little bit more special with this note. I did make this website on my own and did my best to make it as impressive because you are studying CS whereas I'm not. I hope your following years bring success, good health and joy. Have a good day !<br><br>Regards, Alisha
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="thankyou-screen" class="hidden">
+    <button class="back-btn" onclick="goBack()">← Back</button>
+    <div class="card-wrapper" onclick="toggleCard(2)">
+      <div class="card" id="card-2">
+        <div class="card-front"><p>Click to Open 🌟</p></div>
+        <div class="card-inside">
+          <p class="letter-text">
+            Hi Ali. This is my letter to you. In case you didn't know 2 months ago September was Suicide prevention month. And this may sound very insane but I wanna thank you, for being another reason I'm still here. For context back in June 2026 when we first began talking, I fell into a severe depressive episode. I couldn't talk or vent to anyone because all my friends were busy and I'm not so comfortable doing so with family. But, talking to you always brought some spark to my day. the nicknames, funny jokes and awkward confession im still embarrassed about did make me change my mind. Its weird that a person I just started talking to at the time saved me but its true. So thank you. and I hope you have a happy birthday.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function openWishes() {
+    document.getElementById('main-menu').classList.add('hidden');
+    document.getElementById('wishes-screen').classList.remove('hidden');
+  }
+  function openThankYou() {
+    document.getElementById('main-menu').classList.add('hidden');
+    document.getElementById('thankyou-screen').classList.remove('hidden');
+  }
+  function goBack() {
+    document.getElementById('wishes-screen').classList.add('hidden');
+    document.getElementById('thankyou-screen').classList.add('hidden');
+    document.getElementById('main-menu').classList.remove('hidden');
+    const cards = document.querySelectorAll('.card');
+    cards.forEach(card => card.classList.remove('is-open'));
+  }
+  function toggleCard(cardNumber) {
+    const card = document.getElementById('card-' + cardNumber);
+    card.classList.toggle('is-open');
+  }
+</script>
+
+</body>
+</html>
